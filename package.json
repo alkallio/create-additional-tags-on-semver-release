@@ -1,0 +1,31 @@
+{
+  "name": "create-additional-tags-on-semver-release",
+  "version": "1.0.0",
+  "description": "Create additional tags. On vX.Y.Z create or update vX and vX.Y",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint .",
+    "prepare": "ncc build index.js -o dist --source-map --license licenses.txt",
+    "test": "jest",
+    "all": "npm run lint && npm run prepare && npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alkallio/create-additional-tags-on-semver-release.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alkallio/create-additional-tags-on-semver-release/issues"
+  },
+  "homepage": "https://github.com/alkallio/create-additional-tags-on-semver-release#readme",
+  "dependencies": {
+    "@actions/core": "^1.2.5"
+  },
+  "devDependencies": {
+    "@vercel/ncc": "^0.32.0",
+    "eslint": "^8.3.0",
+    "jest": "^27.3.1"
+  }
+}

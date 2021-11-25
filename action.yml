@@ -1,0 +1,5 @@
+name: 'Create additional tags'
+description: 'On vX.Y.Z create or update vX and vX.Y'
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
