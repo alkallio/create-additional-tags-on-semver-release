@@ -1,24 +1,20 @@
-const wait = require('./wait');
-const process = require('process');
-const cp = require('child_process');
-const path = require('path');
+const tagOperations = require('./tagOperations');
 
-test('throws invalid number', async () => {
-  await expect(wait('foo')).rejects.toThrow('milliseconds not a number');
+test('Check if valid semver', async () => {
+  let testTag = 'v1.2.3-asdf';
+  expect(tagOperations.isValid(testTag)).toBeTruthy();
 });
 
-test('wait 500 ms', async () => {
-  const start = new Date();
-  await wait(500);
-  const end = new Date();
-  var delta = Math.abs(end - start);
-  expect(delta).toBeGreaterThanOrEqual(500);
+test('Check if pre-release', async () => {
+  let preReleaseTag = 'v1.2.3-asdf';
+  expect(tagOperations.isPrerelease(preReleaseTag)).toBeTruthy();
+
+  let releaseTag = 'v1.2.3';
+  expect(tagOperations.isPrerelease(releaseTag)).toBeFalsy();
 });
 
-// shows how the runner will run a javascript action with env / stdout protocol
-test('test runs', () => {
-  process.env['INPUT_MILLISECONDS'] = 100;
-  const ip = path.join(__dirname, 'index.js');
-  const result = cp.execSync(`node ${ip}`, {env: process.env}).toString();
-  console.log(result);
-})
+test('Get Major and Minor', async () => {
+  let tag = 'v1.2.3-asdf';
+  expect(tagOperations.getMinor(tag)).toBe(2);
+  expect(tagOperations.getMajor(tag)).toBe(1);
+});
