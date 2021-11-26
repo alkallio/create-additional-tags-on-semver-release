@@ -23,10 +23,10 @@ async function run() {
     let majorTag = 'v' + tagOperations.getMajor(tag);
     let minorTag = majorTag + '.' + tagOperations.getMinor(tag);
 
-    core.info(`Major tag: ${majorTag}`);
+    core.notice(`Major tag: ${majorTag}`);
     createOrUpdate(majorTag, github_sha, octokit, context);
   
-    core.info(`Major tag: ${majorTag}`);
+    core.notice(`Minor tag: ${minorTag}`);
     createOrUpdate(minorTag, github_sha, octokit, context);
 
   } catch (error) {
