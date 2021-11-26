@@ -1,12 +1,14 @@
 const core = require('@actions/core');
-const { GitHub, context } = require('@actions/github');
+const github = require('@actions/github');
 const tagOperations = require('./tagOperations');
 
 async function run() {
   try {
 
     const token = core.getInput('github_token');
+    const context = github.context;
     const github_sha = context.sha;
+    const octokit = github.getOctokit(token);
 
     core.info(`Event is ${context.eventName}`);
 
@@ -22,18 +24,17 @@ async function run() {
     let minorTag = majorTag + '.' + tagOperations.getMinor(tag);
 
     core.info(`Major tag: ${majorTag}`);
-    createOrUpdate(majorTag, github_sha, token, context);
-    
-    core.info(`Minor tag: ${minorTag}`);
-    createOrUpdate(minorTag, github_sha, token, context);
+    createOrUpdate(majorTag, github_sha, octokit, context);
+  
+    core.info(`Major tag: ${majorTag}`);
+    createOrUpdate(minorTag, github_sha, octokit, context);
 
   } catch (error) {
     core.setFailed(error.message);
   }
 }
 
-async function createOrUpdate(tagName, github_sha, token, context) {
-  const octokit = new GitHub(token);
+async function createOrUpdate(tagName, github_sha, octokit, context) {
   let ref;
 
   try {

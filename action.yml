@@ -1,7 +1,7 @@
 name: 'Create additional tags'
 description: 'On vX.Y.Z create or update vX and vX.Y'
 inputs:
-  github_token:  # id of input
+  github_token:
     description: 'Github Token'
     required: true
 runs:

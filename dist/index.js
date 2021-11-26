@@ -11540,14 +11540,16 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
 const core = __nccwpck_require__(2186);
-const { GitHub, context } = __nccwpck_require__(5438);
+const github = __nccwpck_require__(5438);
 const tagOperations = __nccwpck_require__(9472);
 
 async function run() {
   try {
 
     const token = core.getInput('github_token');
+    const context = github.context;
     const github_sha = context.sha;
+    const octokit = github.getOctokit(token);
 
     core.info(`Event is ${context.eventName}`);
 
@@ -11563,18 +11565,17 @@ async function run() {
     let minorTag = majorTag + '.' + tagOperations.getMinor(tag);
 
     core.info(`Major tag: ${majorTag}`);
-    createOrUpdate(majorTag, github_sha, token, context);
-    
-    core.info(`Minor tag: ${minorTag}`);
-    createOrUpdate(minorTag, github_sha, token, context);
+    createOrUpdate(majorTag, github_sha, octokit, context);
+  
+    core.info(`Major tag: ${majorTag}`);
+    createOrUpdate(minorTag, github_sha, octokit, context);
 
   } catch (error) {
     core.setFailed(error.message);
   }
 }
 
-async function createOrUpdate(tagName, github_sha, token, context) {
-  const octokit = new GitHub(token);
+async function createOrUpdate(tagName, github_sha, octokit, context) {
   let ref;
 
   try {
