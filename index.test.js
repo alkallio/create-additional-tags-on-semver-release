@@ -1,10 +1,5 @@
 const tagOperations = require('./tagOperations');
 
-test('Check if valid semver', async () => {
-  let testTag = 'v1.2.3-asdf';
-  expect(tagOperations.isValid(testTag)).toBeTruthy();
-});
-
 test('Check if pre-release', async () => {
   let preReleaseTag = 'v1.2.3-asdf';
   expect(tagOperations.isPrerelease(preReleaseTag)).toBeTruthy();
