@@ -11565,12 +11565,13 @@ async function run() {
     let minorTag = majorTag + '.' + tagOperations.getMinor(tag);
 
     core.notice(`Major tag: ${majorTag}`);
-    createOrUpdate(majorTag, github_sha, octokit, context);
-  
+    await createOrUpdate(majorTag, github_sha, octokit, context);
+
     core.notice(`Minor tag: ${minorTag}`);
-    createOrUpdate(minorTag, github_sha, octokit, context);
+    await createOrUpdate(minorTag, github_sha, octokit, context);
 
   } catch (error) {
+    console.error(error.stack)
     core.setFailed(error.message);
   }
 }

@@ -1,9 +1,9 @@
-name: 'Create additional tags'
-description: 'On vX.Y.Z create or update vX and vX.Y'
+name: "Create additional tags"
+description: "On vX.Y.Z create or update vX and vX.Y"
 inputs:
   github_token:
-    description: 'Github Token'
+    description: "Github Token"
     required: true
 runs:
-  using: 'node12'
-  main: 'dist/index.js'
+  using: "node12"
+  main: "dist/index.js"
