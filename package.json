@@ -30,6 +30,6 @@
     "@vercel/ncc": "^0.33.1",
     "eslint": "^8.5.0",
     "eslint-config-google": "^0.14.0",
-    "jest": "^27.4.5"
+    "jest": "^28.1.0"
   }
 }
