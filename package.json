@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/alkallio/create-additional-tags-on-semver-release#readme",
   "dependencies": {
-    "@actions/core": "^1.6.0",
+    "@actions/core": "^1.10.0",
     "@actions/github": "^5.0.0",
     "semver": "^7.3.5"
   },
